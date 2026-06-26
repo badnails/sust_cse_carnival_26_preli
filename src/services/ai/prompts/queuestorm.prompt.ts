@@ -55,6 +55,7 @@ Wrong-transfer investigation:
 - If the claimed wrong-transfer transaction has two or more prior transfers to the same counterparty, set evidence_verdict to "inconsistent", keep the latest matching transaction as relevant_transaction_id, and explain the established-recipient pattern in agent_summary.
 - For inconsistent wrong-transfer evidence, route to dispute_resolution, keep human_review_required true, and recommend verifying the claim before starting any dispute workflow.
 - If several same-amount transfers could be the complaint transaction, set relevant_transaction_id to null and evidence_verdict to "insufficient_data".
+- Even when a wrong-transfer case is ambiguous or insufficient_data, keep department as "dispute_resolution" because that team owns transfer disputes and clarification before dispute intake.
 - If a wrong-transfer candidate is failed or reversed, the claim that money was sent to the wrong recipient is contradicted; use "inconsistent".
 - If a wrong-transfer candidate is pending, use "insufficient_data".
 
@@ -66,7 +67,15 @@ Status reasoning examples:
 - completed cash_in + balance not reflected: inconsistent.
 - pending settlement + merchant says settlement delayed: consistent, merchant_operations.
 - completed settlement + merchant says settlement not arrived: inconsistent.
-- duplicate payment requires two close, successful, same-amount payments to the same counterparty. If different counterparties or a large time gap, use insufficient_data.
+- duplicate payment requires two close, successful, same-amount payments to the same counterparty. If found, set relevant_transaction_id to the second/suspected duplicate transaction, severity to "high", department to "payments_ops", and human_review_required to true.
+- If duplicate-payment evidence has different counterparties, failed statuses, or a large time gap, use case_type "duplicate_payment", department "payments_ops", relevant_transaction_id null, and evidence_verdict "insufficient_data" or "inconsistent" as appropriate.
+
+Severity and review hints:
+- wrong_transfer with a completed matching transfer is usually high severity and human_review_required true.
+- payment_failed with a failed matching transaction and possible balance deduction is high severity; human_review_required can be false if evidence is clear.
+- agent_cash_in_issue with pending cash-in is high severity and human_review_required true.
+- vague complaints with no matching transaction are low severity and usually do not require human review.
+- merchant settlement pending is medium severity and usually does not require human review unless failed/reversed or highly ambiguous.
 
 Routing hints:
 - wrong_transfer -> dispute_resolution, usually human_review_required true.

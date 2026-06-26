@@ -1,35 +1,165 @@
-{
-  "ticket_id": "TKT-002",
-  "relevant_transaction_id": "TXN-9202",
-  "evidence_verdict": "inconsistent",
-  "case_type": "wrong_transfer",
-  "severity": "medium",
-  "department": "dispute_resolution",
-  "agent_summary": "The customer claims a wrong transfer of 2000. Transaction TXN-9202 matches the amount and date. However, the user has a history of two prior successful transfers to the same counterparty (+8801812345678) on 2026-04-05 and 2026-04-10, indicating an established recipient relationship which contradicts the claim of a mistake.",
-  "recommended_next_action": "Verify the claim with the user regarding the established recipient history before proceeding with any further investigation.",
-  "customer_reply": "Thank you for reaching out. We are reviewing your concern and will contact you through official support channels. Please do not share your PIN, OTP, password, or full card number with anyone.",
-  "human_review_required": true,
-  "confidence": 0.9,
-  "reason_codes": [
-    "established_recipient_pattern",
-    "safety_guard_applied"
-  ]
-}
-
-{
-  "ticket_id": "TKT-004",
-  "relevant_transaction_id": "TXN-9401",
-  "evidence_verdict": "consistent",
-  "case_type": "refund_request",
-  "severity": "low",
-  "department": "customer_support",
-  "agent_summary": "Customer is requesting a refund for a completed payment of 500 taka to MERCHANT-7821 (TXN-9401) due to a change of mind. The transaction is confirmed as completed in the history.",
-  "recommended_next_action": "Advise the customer that refunds are subject to the merchant's return policy and suggest they contact the merchant directly for a refund request, as the platform cannot unilaterally reverse completed payments.",
-  "customer_reply": "Thank you for reaching out. I have reviewed your transaction TXN-9401 for 500 taka. As this payment was successfully completed, please note that our platform cannot automatically reverse the funds. We recommend that you contact the merchant directly to request a refund according to their return policy. Please ensure you never share your PIN or password with anyone, including the merchant.",
-  "human_review_required": false,
-  "confidence": 1,
-  "reason_codes": [
-    "refund_policy_clarification"
-  ]
-}
-
+[
+  {
+    "ticket_id": "TKT-001",
+    "relevant_transaction_id": "TXN-9101",
+    "evidence_verdict": "consistent",
+    "case_type": "wrong_transfer",
+    "severity": "medium",
+    "department": "dispute_resolution",
+    "agent_summary": "Customer claims to have sent 5000 taka to the wrong number at approximately 2pm today. Transaction TXN-9101 matches the amount and timestamp (14:08:22Z) and was sent to +8801719876543, which differs from the intended recipient 01712345678. No prior history with this counterparty exists, supporting the claim of a potential error.",
+    "recommended_next_action": "Flag for human review to verify the transaction details and assess the possibility of recovery through internal dispute channels.",
+    "customer_reply": "Thank you for reaching out. We have identified the transaction of 5000 taka sent at 14:08 today. As this involves a transfer to a third party, we have flagged this for a manual review by our dispute resolution team. Please note that we cannot guarantee the recovery of funds. We will notify you of any updates through official channels. Please remember to never share your PIN or OTP with anyone, including our support staff.",
+    "human_review_required": true,
+    "confidence": 0.95,
+    "reason_codes": [
+      "wrong_transfer_identified",
+      "no_prior_history_with_counterparty"
+    ]
+  },
+  {
+    "ticket_id": "TKT-002",
+    "relevant_transaction_id": "TXN-9202",
+    "evidence_verdict": "inconsistent",
+    "case_type": "wrong_transfer",
+    "severity": "medium",
+    "department": "dispute_resolution",
+    "agent_summary": "The customer claims a wrong transfer of 2000. Transaction TXN-9202 matches the amount and date. However, the user has a history of two prior successful transfers to the same counterparty (+8801812345678) on 2026-04-05 and 2026-04-10, indicating an established recipient relationship which contradicts the claim of a mistake.",
+    "recommended_next_action": "Verify the claim with the user regarding the established recipient history before proceeding with any further investigation.",
+    "customer_reply": "Thank you for reaching out. We are reviewing your concern and will contact you through official support channels. Please do not share your PIN, OTP, password, or full card number with anyone.",
+    "human_review_required": true,
+    "confidence": 0.9,
+    "reason_codes": [
+      "established_recipient_pattern",
+      "safety_guard_applied"
+    ]
+  },
+  {
+    "ticket_id": "TKT-003",
+    "relevant_transaction_id": "TXN-9301",
+    "evidence_verdict": "consistent",
+    "case_type": "payment_failed",
+    "severity": "medium",
+    "department": "payments_ops",
+    "agent_summary": "Customer reported a failed mobile recharge of 1200 taka where the balance was deducted. Transaction TXN-9301 confirms a failed status for the exact amount of 1200 taka, supporting the claim of a failed transaction with potential balance deduction.",
+    "recommended_next_action": "Verify the ledger balance to confirm if the deduction occurred despite the failed status and process a reversal if applicable.",
+    "customer_reply": "Thank you for reaching out. I have reviewed your transaction TXN-9301 for 1200 taka. I can see that the transaction failed, and I have flagged this for our payments team to verify the balance deduction. If the funds were deducted, any eligible amount will be returned through our official channels. Please do not share your PIN or password with anyone.",
+    "human_review_required": true,
+    "confidence": 0.95,
+    "reason_codes": [
+      "failed_transaction_deduction"
+    ]
+  },
+  {
+    "ticket_id": "TKT-004",
+    "relevant_transaction_id": "TXN-9401",
+    "evidence_verdict": "consistent",
+    "case_type": "refund_request",
+    "severity": "low",
+    "department": "customer_support",
+    "agent_summary": "Customer is requesting a refund for a completed payment of 500 taka to MERCHANT-7821 (TXN-9401) due to a change of mind. The transaction is confirmed as completed in the history.",
+    "recommended_next_action": "Advise the customer that refunds are subject to the merchant's return policy and suggest they contact the merchant directly for a refund request, as the platform cannot unilaterally reverse completed payments.",
+    "customer_reply": "Thank you for reaching out. I have reviewed your transaction TXN-9401 for 500 taka. As this payment was successfully completed, please note that our platform cannot automatically reverse the funds. We recommend that you contact the merchant directly to request a refund according to their return policy. Please ensure you never share your PIN or password with anyone, including the merchant.",
+    "human_review_required": false,
+    "confidence": 1,
+    "reason_codes": [
+      "refund_policy_clarification"
+    ]
+  },
+  {
+    "ticket_id": "TKT-005",
+    "relevant_transaction_id": null,
+    "evidence_verdict": "insufficient_data",
+    "case_type": "phishing_or_social_engineering",
+    "severity": "critical",
+    "department": "fraud_risk",
+    "agent_summary": "Customer reported a potential social engineering attempt where an individual claiming to be from bKash requested an OTP under the threat of account blockage. The customer confirmed they did not share any sensitive information.",
+    "recommended_next_action": "Flag account for security monitoring and advise the customer on official communication channels.",
+    "customer_reply": "Thank you for reporting this. Please be advised that our official representatives will never ask for your OTP, PIN, or password. This was a phishing attempt. Please do not share any sensitive information with anyone. Your account security is our priority, and we have flagged this incident for our fraud prevention team.",
+    "human_review_required": true,
+    "confidence": 1,
+    "reason_codes": [
+      "phishing_attempt",
+      "security_alert"
+    ]
+  },
+  {
+    "ticket_id": "TKT-006",
+    "relevant_transaction_id": null,
+    "evidence_verdict": "insufficient_data",
+    "case_type": "other",
+    "severity": "low",
+    "department": "customer_support",
+    "agent_summary": "The customer submitted a vague complaint stating 'Something is wrong with my money' without specifying a transaction, amount, or issue type. A review of the transaction history shows a completed cash-in (TXN-9601) and a completed transfer (TXN-9602), neither of which show obvious errors.",
+    "recommended_next_action": "Request specific details from the customer regarding which transaction or balance discrepancy they are referring to.",
+    "customer_reply": "Thank you for reaching out. To help you resolve this, could you please provide more details about the issue? Specifically, please let us know which transaction you are concerned about or describe the discrepancy you are seeing in your account. Please remember to never share your PIN or password with anyone.",
+    "human_review_required": true,
+    "confidence": 0.95,
+    "reason_codes": [
+      "vague_complaint"
+    ]
+  },
+  {
+    "ticket_id": "TKT-007",
+    "relevant_transaction_id": "TXN-9701",
+    "evidence_verdict": "consistent",
+    "case_type": "agent_cash_in_issue",
+    "severity": "medium",
+    "department": "agent_operations",
+    "agent_summary": "The customer reported a failed cash-in of 2000 BDT. Transaction TXN-9701 matches the amount and counterparty (AGENT-318) and is currently in 'pending' status, which supports the customer's claim that the balance has not yet been updated.",
+    "recommended_next_action": "Verify the status of the pending transaction with the agent's settlement account and update the customer balance if the transaction is confirmed by the agent.",
+    "customer_reply": "আপনার অভিযোগের জন্য দুঃখিত। আমরা আপনার ২০০০ টাকা ক্যাশ-ইন সংক্রান্ত লেনদেনটি (TXN-9701) পর্যালোচনা করছি। এটি বর্তমানে পেন্ডিং অবস্থায় আছে। অনুগ্রহ করে ধৈর্য ধরুন, আমরা বিষয়টি যাচাই করে দ্রুত সমাধান করার চেষ্টা করছি। নিরাপত্তার স্বার্থে আপনার পিন বা ওটিপি কাউকে দেবেন না।",
+    "human_review_required": true,
+    "confidence": 0.95,
+    "reason_codes": [
+      "pending_transaction_status"
+    ]
+  },
+  {
+    "ticket_id": "TKT-008",
+    "relevant_transaction_id": null,
+    "evidence_verdict": "insufficient_data",
+    "case_type": "wrong_transfer",
+    "severity": "medium",
+    "department": "customer_support",
+    "agent_summary": "The customer claims a transfer of 1000 failed to reach the recipient. Transaction history shows two successful transfers of 1000 to different counterparties (+8801712001122 and +8801812334455) on the same day, plus one failed attempt. Due to multiple successful transactions of the same amount, it is unclear which specific transfer the customer is referring to.",
+    "recommended_next_action": "Request the customer to provide the specific recipient phone number or the transaction ID to clarify which transfer is in question.",
+    "customer_reply": "Thank you for reaching out. To help me investigate this, could you please confirm the phone number of the recipient or the specific transaction ID for the transfer you are referring to? This will allow me to check the status of that exact payment for you.",
+    "human_review_required": true,
+    "confidence": 0.9,
+    "reason_codes": [
+      "multiple_matching_transactions"
+    ]
+  },
+  {
+    "ticket_id": "TKT-009",
+    "relevant_transaction_id": "TXN-9901",
+    "evidence_verdict": "consistent",
+    "case_type": "merchant_settlement_delay",
+    "severity": "medium",
+    "department": "merchant_operations",
+    "agent_summary": "The merchant reported a missing settlement of 15000 taka. Transaction TXN-9901 matches the amount and type but is currently in 'pending' status, which aligns with the merchant's report of a delay beyond the expected 11am settlement time.",
+    "recommended_next_action": "Review the settlement queue for TXN-9901 to identify the cause of the delay and update the merchant on the expected completion time.",
+    "customer_reply": "Thank you for reaching out. I have reviewed your account and can confirm that your settlement of 15000 taka (TXN-9901) is currently pending. Our team is investigating the delay, and we will update you as soon as the funds are processed. Please rest assured that your funds are secure.",
+    "human_review_required": true,
+    "confidence": 0.95,
+    "reason_codes": [
+      "settlement_pending"
+    ]
+  },
+  {
+    "ticket_id": "TKT-010",
+    "relevant_transaction_id": null,
+    "evidence_verdict": "consistent",
+    "case_type": "duplicate_payment",
+    "severity": "medium",
+    "department": "payments_ops",
+    "agent_summary": "The customer reported a duplicate payment of 850 taka for an electricity bill. Transaction history confirms two identical successful payments of 850 taka to BILLER-DESCO (TXN-10001 and TXN-10002) occurring within 12 seconds of each other, supporting the claim of a duplicate charge.",
+    "recommended_next_action": "Review the duplicate transactions for potential reversal or credit adjustment through the billing partner.",
+    "customer_reply": "Thank you for reaching out. I have reviewed your account and confirmed that two payments of 850 taka were processed for your electricity bill on April 14th. I have flagged this for our payments team to investigate the duplicate charge. Any eligible amount will be returned through official channels. Please do not share your PIN or password with anyone.",
+    "human_review_required": true,
+    "confidence": 0.95,
+    "reason_codes": [
+      "duplicate_transaction_detected"
+    ]
+  }
+]
