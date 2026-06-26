@@ -7,13 +7,13 @@ import { GeminiService, type IAIService } from "./services/ai";
 import { InvestigatorService } from "./services/investigator.service";
 
 const createAIService = (): IAIService | undefined => {
-  if (!env.geminiApiKey) {
+  if (env.geminiApiKeys.length === 0) {
     return undefined;
   }
 
   try {
     return new GeminiService(
-      env.geminiApiKey,
+      env.geminiApiKeys,
       env.geminiModel,
       env.geminiTimeoutMs,
     );
@@ -33,14 +33,18 @@ registerHealthRoute(app);
 registerAnalyzeTicketRoute(app, analyzeTicketController);
 
 app.onError(({ code, set }) => {
-  set.status = code === "VALIDATION" ? 400 : 500;
+  if (code === "NOT_FOUND") {
+    set.status = 404;
+    return { error: "Not found." };
+  }
 
-  return {
-    error:
-      code === "VALIDATION"
-        ? "Invalid request."
-        : "Internal server error.",
-  };
+  if (code === "VALIDATION") {
+    set.status = 400;
+    return { error: "Invalid request." };
+  }
+
+  set.status = 500;
+  return { error: "Internal server error." };
 });
 
 if (import.meta.main) {

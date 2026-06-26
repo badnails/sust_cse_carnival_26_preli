@@ -12,7 +12,8 @@ import type { IAIService } from "./ai-service.interface";
 import { buildQueueStormPrompt } from "./prompts/queuestorm.prompt";
 
 export class GeminiService implements IAIService {
-  private readonly client: GoogleGenerativeAI;
+  private keyIndex = 0;
+  private readonly clients = new Map<string, GoogleGenerativeAI>();
   private readonly modelName: string;
   private readonly timeoutMs: number;
   private readonly generationConfig: GenerationConfig = {
@@ -21,15 +22,14 @@ export class GeminiService implements IAIService {
   };
 
   constructor(
-    apiKey: string,
+    private readonly apiKeys: string[],
     modelName: string,
     timeoutMs: number,
   ) {
-    if (!apiKey) {
-      throw new AIServiceError("Gemini API key is not configured.");
+    if (apiKeys.length === 0) {
+      throw new AIServiceError("Gemini API keys are not configured.");
     }
 
-    this.client = new GoogleGenerativeAI(apiKey);
     this.modelName = modelName;
     this.timeoutMs = timeoutMs;
   }
@@ -37,7 +37,27 @@ export class GeminiService implements IAIService {
   async analyzeTicket(
     request: AnalyzeTicketRequest,
   ): Promise<AnalyzeTicketResponse> {
-    const model = this.client.getGenerativeModel({
+    const attempts = Math.min(this.apiKeys.length, 2);
+    let lastError: unknown;
+
+    for (let attempt = 0; attempt < attempts; attempt += 1) {
+      try {
+        return await this.analyzeTicketWithKey(request, this.nextApiKey());
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    throw lastError instanceof Error
+      ? lastError
+      : new AIServiceError("Gemini request failed.");
+  }
+
+  private async analyzeTicketWithKey(
+    request: AnalyzeTicketRequest,
+    apiKey: string,
+  ): Promise<AnalyzeTicketResponse> {
+    const model = this.clientForKey(apiKey).getGenerativeModel({
       model: this.modelName,
       generationConfig: this.generationConfig,
     });
@@ -58,6 +78,24 @@ export class GeminiService implements IAIService {
     }
 
     return parsedResponse.data;
+  }
+
+  private nextApiKey(): string {
+    const apiKey = this.apiKeys[this.keyIndex];
+    this.keyIndex = (this.keyIndex + 1) % this.apiKeys.length;
+    return apiKey;
+  }
+
+  private clientForKey(apiKey: string): GoogleGenerativeAI {
+    const existingClient = this.clients.get(apiKey);
+
+    if (existingClient) {
+      return existingClient;
+    }
+
+    const client = new GoogleGenerativeAI(apiKey);
+    this.clients.set(apiKey, client);
+    return client;
   }
 
   private async withTimeout<T>(promise: Promise<T>): Promise<T> {

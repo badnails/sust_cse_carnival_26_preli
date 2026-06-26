@@ -14,9 +14,21 @@ const toPositiveInteger = (
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 };
 
+const parseCsv = (value: string | undefined): string[] =>
+  value
+    ?.split(",")
+    .map((item) => item.trim())
+    .filter(Boolean) ?? [];
+
+const geminiApiKeys = [
+  ...parseCsv(Bun.env.GEMINI_API_KEYS),
+  ...parseCsv(Bun.env.GEMINI_API_KEY),
+  ...parseCsv(Bun.env.GOOGLE_API_KEY),
+];
+
 export const env = {
   port: toPositiveInteger(Bun.env.PORT, DEFAULT_PORT),
-  geminiApiKey: Bun.env.GEMINI_API_KEY ?? Bun.env.GOOGLE_API_KEY,
+  geminiApiKeys: [...new Set(geminiApiKeys)],
   geminiModel: Bun.env.GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL,
   geminiTimeoutMs: toPositiveInteger(
     Bun.env.GEMINI_TIMEOUT_MS,

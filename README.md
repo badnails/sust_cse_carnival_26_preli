@@ -14,7 +14,7 @@ A small Bun + Elysia service that triages customer complaint tickets for a digit
 
 ```bash
 bun install
-GEMINI_API_KEY=your_key bun run dev
+GEMINI_API_KEYS=your_key bun run dev
 # server listens on PORT (default 8000)
 ```
 
@@ -25,15 +25,27 @@ Other scripts: `bun run start` (production), `bun run typecheck`.
 | Var | Default | Purpose |
 |---|---|---|
 | `PORT` | `8000` | HTTP port |
-| `GEMINI_API_KEY` / `GOOGLE_API_KEY` | — | Enables AI-based analysis. Omit to run on the rule-based engine only. |
+| `GEMINI_API_KEYS` | — | Optional comma-separated Gemini keys. Requests rotate through these keys to spread quota usage. |
+| `GEMINI_API_KEY` / `GOOGLE_API_KEY` | — | Single-key fallback. Also accepts comma-separated values. Omit all keys to run on the rule-based engine only. |
 | `GEMINI_MODEL` | `gemini-3.1-flash-lite` | Gemini model name |
 | `GEMINI_TIMEOUT_MS` | `20000` | Per-request timeout |
+
+### Reliability helpers
+
+- **Gemini key rotation:** When multiple keys are configured, `GeminiService` keeps a simple in-memory index and uses the next key for each Gemini request. If one Gemini attempt fails, it retries once with the next key before falling back to the rule-based engine.
+- **Local judge-style tester:** `queuestorm_tester.py` runs public samples, generated reasoning cases, malformed-input checks, safety checks, and a burst phase. Example:
+
+```bash
+python3 queuestorm_tester.py http://localhost:8000 \
+  --sample-path problem_outline/SUST_Preli_Sample_Cases.json \
+  --output queuestorm_report.json
+```
 
 ## Docker
 
 ```bash
 docker build -t queuestorm-investigator .
-docker run --rm -p 8000:8000 -e GEMINI_API_KEY=your_key queuestorm-investigator
+docker run --rm -p 8000:8000 -e GEMINI_API_KEYS=key1,key2 queuestorm-investigator
 ```
 
 The image uses `oven/bun:1-alpine`, exposes port 8000, and runs `bun src/index.ts`.
@@ -50,7 +62,7 @@ The image uses `oven/bun:1-alpine`, exposes port 8000, and runs `bun src/index.t
   "ticket_id": "T-1001",
   "complaint": "I was charged twice for 500 BDT on my last payment.",
   "language": "en",
-  "channel": "app",
+  "channel": "in_app_chat",
   "user_type": "customer",
   "transaction_history": [
     { "transaction_id": "TX1", "type": "payment", "amount": 500, "status": "completed", "counterparty": "Merchant A", "timestamp": "2026-06-25T10:00:00Z" }
@@ -73,7 +85,7 @@ The image uses `oven/bun:1-alpine`, exposes port 8000, and runs `bun src/index.t
   "customer_reply": "...",
   "human_review_required": true,
   "confidence": 0.9,
-  "reason_codes": ["DUPLICATE_PAYMENT", "BILLER_VERIFICATION_REQUIRED"]
+  "reason_codes": ["duplicate_payment", "biller_verification_required"]
 }
 ```
 
@@ -89,15 +101,17 @@ The image uses `oven/bun:1-alpine`, exposes port 8000, and runs `bun src/index.t
 | **`gemini-3.1-flash-lite`** (`GeminiService`, default via `GEMINI_MODEL`) | Google Gemini-3.1-flash-lite, called via `@google/generative-ai` with `temperature: 0.1` and `responseMimeType: "application/json"` | Google-hosted Gemini API (external, HTTPS) | Lowest cost and latency in the Gemini family while still handling free-form, multilingual, ambiguous complaints. Strict JSON mode + low temperature keeps outputs schema-stable. |
 | **SafetyGuard** (`src/utils/safety-guard.ts`) | Regex-based output post-filter on the AI path | Inside the Bun process | Trust-but-verify: catches any unsafe phrasing the model may emit regardless of prompt instructions. |
 
-The Gemini key (`GEMINI_API_KEY` or `GOOGLE_API_KEY`) is the only optional dependency. If it is missing or `GeminiService` fails to construct, the service silently degrades to the rule-based engine.
+Gemini keys are the only optional dependency. Prefer `GEMINI_API_KEYS` for multiple independent quota pools; `GEMINI_API_KEY` and `GOOGLE_API_KEY` remain supported for single-key deployments. If no key is configured or `GeminiService` fails to construct, the service silently degrades to the rule-based engine.
 
 ### Fallback chain
 
 For every request:
 
-1. Try the AI path if a key is configured.
-2. On any error (timeout, invalid JSON, schema mismatch, wrong `ticket_id`), fall back to the rule-based engine.
-3. If the rule engine itself throws, return `createFallbackResponse` (safe canned reply, `human_review_required: true`).
+1. Try the AI path if at least one key is configured.
+2. Pick the next configured Gemini key by round-robin.
+3. On Gemini error (timeout, provider failure, invalid JSON, schema mismatch, wrong `ticket_id`), retry once with the next key.
+4. If Gemini still fails, fall back to the rule-based engine.
+5. If the rule engine itself throws, return `createFallbackResponse` (safe canned reply, `human_review_required: true`).
 
 In all three tiers the `SafetyGuard` still sanitizes the final output.
 
@@ -105,9 +119,7 @@ In all three tiers the `SafetyGuard` still sanitizes the final output.
 
 gemini-3.1-flash-lite was picked specifically to keep per-ticket cost negligible for a preli/demo workload:
 
-
 - A 20-second timeout (`GEMINI_TIMEOUT_MS`, default `20000`) caps any runaway request before it burns more tokens.
-
 - The `temperature: 0.1` + JSON mode combo keeps output tokens short and predictable, which is the main cost driver on Flash.
 
 If the judge environment has no network or no API key, the service still works end-to-end on the rule-based engine alone.
@@ -130,7 +142,8 @@ The system is designed never to ask for or commit to sensitive financial actions
 
 ## Known limitations
 
-- **15 requests per minute.** The service is rate-limited to 15 requests per minute; bursts above this are rejected to keep Gemini usage predictable.
+- Gemini key rotation is intentionally simple. It spreads requests across configured keys and retries once, but it does not track per-key cooldowns, quotas, or health over time.
+- The rule-based fallback is deterministic and safe, but less nuanced than the Gemini path for unusual free-form complaints.
 
 ## Project layout
 
@@ -153,7 +166,7 @@ src/
 
 ## System prompt for LLM
 
-This is the  prompt sent to `gemini-3.1` as system prompt. It lives in `src/services/ai/prompts/queuestorm.prompt.ts`.
+This is the prompt sent to Gemini as the system-style instruction. It lives in `src/services/ai/prompts/queuestorm.prompt.ts`.
 
 ```
 You are QueueStorm Investigator, an internal support copilot for a digital finance platform.
