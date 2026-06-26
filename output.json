@@ -1,0 +1,35 @@
+{
+  "ticket_id": "TKT-002",
+  "relevant_transaction_id": "TXN-9202",
+  "evidence_verdict": "inconsistent",
+  "case_type": "wrong_transfer",
+  "severity": "medium",
+  "department": "dispute_resolution",
+  "agent_summary": "The customer claims a wrong transfer of 2000. Transaction TXN-9202 matches the amount and date. However, the user has a history of two prior successful transfers to the same counterparty (+8801812345678) on 2026-04-05 and 2026-04-10, indicating an established recipient relationship which contradicts the claim of a mistake.",
+  "recommended_next_action": "Verify the claim with the user regarding the established recipient history before proceeding with any further investigation.",
+  "customer_reply": "Thank you for reaching out. We are reviewing your concern and will contact you through official support channels. Please do not share your PIN, OTP, password, or full card number with anyone.",
+  "human_review_required": true,
+  "confidence": 0.9,
+  "reason_codes": [
+    "established_recipient_pattern",
+    "safety_guard_applied"
+  ]
+}
+
+{
+  "ticket_id": "TKT-004",
+  "relevant_transaction_id": "TXN-9401",
+  "evidence_verdict": "consistent",
+  "case_type": "refund_request",
+  "severity": "low",
+  "department": "customer_support",
+  "agent_summary": "Customer is requesting a refund for a completed payment of 500 taka to MERCHANT-7821 (TXN-9401) due to a change of mind. The transaction is confirmed as completed in the history.",
+  "recommended_next_action": "Advise the customer that refunds are subject to the merchant's return policy and suggest they contact the merchant directly for a refund request, as the platform cannot unilaterally reverse completed payments.",
+  "customer_reply": "Thank you for reaching out. I have reviewed your transaction TXN-9401 for 500 taka. As this payment was successfully completed, please note that our platform cannot automatically reverse the funds. We recommend that you contact the merchant directly to request a refund according to their return policy. Please ensure you never share your PIN or password with anyone, including the merchant.",
+  "human_review_required": false,
+  "confidence": 1,
+  "reason_codes": [
+    "refund_policy_clarification"
+  ]
+}
+
