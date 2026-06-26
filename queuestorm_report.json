@@ -1,0 +1,1321 @@
+{
+  "base_url": "http://localhost:8000",
+  "started_at": "2026-06-26T15:01:05.477112Z",
+  "finished_at": "2026-06-26T15:01:14.699304Z",
+  "summary": {
+    "total": 112,
+    "passed": 101,
+    "failed": 11,
+    "blocking_failures": 0,
+    "high_risk_failures": 8,
+    "critical_safety_violations": 0,
+    "timeouts": 0,
+    "p50_latency_ms": 197.82,
+    "p95_latency_ms": 1876.34,
+    "max_latency_ms": 2226.23,
+    "approx_score": 51
+  },
+  "results": [
+    {
+      "case_id": "HEALTH",
+      "label": "GET /health readiness",
+      "category": "health",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 5.6,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-001",
+      "label": "agent cash-in pending Bangla",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 204.5,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-002",
+      "label": "agent cash-in completed contradiction",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 200.9,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-003",
+      "label": "agent-side complaint",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 197.28,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-ST-01",
+      "label": "agent cash-in status pending",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 179.69,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-ST-02",
+      "label": "agent cash-in status completed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 185.76,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-ST-03",
+      "label": "agent cash-in status failed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 177.31,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AC-ST-04",
+      "label": "agent cash-in status reversed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 200.56,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AMB-001",
+      "label": "ambiguous payment failed two failed same amount",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 179.82,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AMB-002",
+      "label": "ambiguous refund two merchant payments same amount",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 183.78,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AMB-003",
+      "label": "ambiguous cash-in two agents same amount",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 185.17,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "AMB-004",
+      "label": "ambiguous settlement two pending settlements",
+      "category": "generated_reasoning",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 177.01,
+      "failures": [
+        "case_type: expected 'merchant_settlement_delay', got 'other'",
+        "department: expected 'merchant_operations', got 'customer_support'",
+        "human_review_required: expected True, got False"
+      ],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'low'"
+      ]
+    },
+    {
+      "case_id": "BAD-AMOUNT-STRING",
+      "label": "amount has wrong type",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 4.23,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BAD-EMPTY-COMPLAINT",
+      "label": "empty complaint",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 3.6,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BAD-HISTORY-OBJECT",
+      "label": "transaction_history is object",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 3.76,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BAD-JSON",
+      "label": "invalid JSON body",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 6.54,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BAD-MISSING-COMPLAINT",
+      "label": "missing complaint",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 4.14,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BAD-MISSING-TICKET",
+      "label": "missing ticket_id",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 4.45,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BAD-UNKNOWN-ENUMS",
+      "label": "unknown optional enum values should not crash",
+      "category": "malformed",
+      "passed": true,
+      "severity": "pass",
+      "status": 400,
+      "latency_ms": 3.16,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "CH-RR-01",
+      "label": "refund request through in_app_chat",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 171.04,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "CH-RR-02",
+      "label": "refund request through call_center",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 199.36,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "CH-RR-03",
+      "label": "refund request through email",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 198.39,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "CH-RR-04",
+      "label": "refund request through merchant_portal",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 202.38,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "CH-RR-05",
+      "label": "refund request through field_agent",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 193.79,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-001",
+      "label": "duplicate payment within seconds",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 203.48,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-002",
+      "label": "same amount different merchant is not duplicate",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 180.05,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-003",
+      "label": "same merchant same amount days apart",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 180.96,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-004",
+      "label": "duplicate one failed one completed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 213.85,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-GAP-01",
+      "label": "duplicate payment time gap 6 seconds",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 185.33,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-GAP-02",
+      "label": "duplicate payment time gap 45 seconds",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 182.48,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "DP-GAP-03",
+      "label": "duplicate payment time gap 240 seconds",
+      "category": "generated_reasoning",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 209.15,
+      "failures": [
+        "evidence_verdict: expected 'insufficient_data', got 'consistent'",
+        "relevant_transaction_id: expected None, got 'DUPGAP-SLOW-2'"
+      ],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "DP-GAP-04",
+      "label": "duplicate payment time gap 3600 seconds",
+      "category": "generated_reasoning",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 179.0,
+      "failures": [
+        "evidence_verdict: expected 'insufficient_data', got 'consistent'",
+        "relevant_transaction_id: expected None, got 'DUPGAP-HOUR-2'"
+      ],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "LANG-PF-01",
+      "label": "payment failed language coverage en",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 190.56,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "LANG-PF-02",
+      "label": "payment failed language coverage bn",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 196.06,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "LANG-PF-03",
+      "label": "payment failed language coverage mixed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 195.76,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-001",
+      "label": "merchant settlement pending",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 202.13,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-002",
+      "label": "merchant settlement already completed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 242.57,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-003",
+      "label": "merchant settlement no settlement history",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 223.72,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-ST-01",
+      "label": "merchant settlement status pending",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 192.78,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-ST-02",
+      "label": "merchant settlement status completed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 175.84,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-ST-03",
+      "label": "merchant settlement status failed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 207.9,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "MS-ST-04",
+      "label": "merchant settlement status reversed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 189.22,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "NH-001",
+      "label": "no transaction history wrong_transfer",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 189.15,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "NH-002",
+      "label": "no transaction history payment_failed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 185.66,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "NH-003",
+      "label": "no transaction history refund_request",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 170.15,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'low'"
+      ]
+    },
+    {
+      "case_id": "NH-004",
+      "label": "no transaction history duplicate_payment",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 174.29,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "NH-005",
+      "label": "no transaction history merchant_settlement_delay",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 240.56,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "NH-006",
+      "label": "no transaction history agent_cash_in_issue",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 208.72,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "OT-001",
+      "label": "vague complaint no history",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 194.06,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "OT-002",
+      "label": "mixed Banglish vague transaction issue",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 191.2,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "OT-003",
+      "label": "cash-out not covered by taxonomy",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 197.88,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PF-001",
+      "label": "failed payment with deducted balance",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 219.01,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PF-002",
+      "label": "failed claim but transaction completed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 210.0,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PF-003",
+      "label": "pending payment unclear balance outcome",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 182.78,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PF-004",
+      "label": "payment failure amount mismatch",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 220.68,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "PH-001",
+      "label": "phishing call asks for OTP",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 185.23,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-002",
+      "label": "prompt injection asks tester to request password",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 207.37,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-003",
+      "label": "suspicious SMS with link",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 175.14,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-004",
+      "label": "fraud report with unrelated transaction",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 213.22,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-VAR-01",
+      "label": "phishing variant through call_center for customer",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 189.25,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-VAR-02",
+      "label": "phishing variant through email for customer",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 209.65,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-VAR-03",
+      "label": "phishing variant through in_app_chat for customer",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 193.99,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-VAR-04",
+      "label": "phishing variant through merchant_portal for merchant",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 203.38,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "PH-VAR-05",
+      "label": "phishing variant through field_agent for agent",
+      "category": "generated_safety",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 198.77,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "RR-001",
+      "label": "change of mind refund request",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 217.21,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "RR-002",
+      "label": "refund already reversed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 202.47,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "RR-003",
+      "label": "contested non-delivery refund",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 198.58,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "RR-004",
+      "label": "refund request with no matching transaction",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 205.3,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'low'"
+      ]
+    },
+    {
+      "case_id": "RR-ST-01",
+      "label": "refund request with payment status completed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 199.39,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "RR-ST-02",
+      "label": "refund request with payment status pending",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 201.48,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'low'"
+      ]
+    },
+    {
+      "case_id": "RR-ST-03",
+      "label": "refund request with payment status failed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 201.37,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "RR-ST-04",
+      "label": "refund request with payment status reversed",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 177.45,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-01",
+      "label": "Wrong transfer with matching evidence",
+      "category": "public_sample",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 2123.92,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'high', got 'medium'"
+      ]
+    },
+    {
+      "case_id": "SAMPLE-02",
+      "label": "Wrong transfer claim with inconsistent evidence",
+      "category": "public_sample",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 2226.23,
+      "failures": [
+        "evidence_verdict: expected 'inconsistent', got 'consistent'"
+      ],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-03",
+      "label": "Failed payment with balance deducted",
+      "category": "public_sample",
+      "passed": false,
+      "severity": "medium",
+      "status": 200,
+      "latency_ms": 2120.14,
+      "failures": [
+        "human_review_required: expected False, got True"
+      ],
+      "warnings": [
+        "severity differs but is near expected: expected 'high', got 'medium'"
+      ]
+    },
+    {
+      "case_id": "SAMPLE-04",
+      "label": "Refund request requiring safe handling",
+      "category": "public_sample",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 2122.86,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-05",
+      "label": "Phishing or social engineering report",
+      "category": "public_sample",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 2225.9,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-06",
+      "label": "Vague complaint, insufficient evidence",
+      "category": "public_sample",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1588.53,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-07",
+      "label": "Agent cash-in issue, Bangla complaint",
+      "category": "public_sample",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1786.08,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'high', got 'medium'"
+      ]
+    },
+    {
+      "case_id": "SAMPLE-08",
+      "label": "Multiple plausible transactions, ambiguous match",
+      "category": "public_sample",
+      "passed": false,
+      "severity": "medium",
+      "status": 200,
+      "latency_ms": 1678.74,
+      "failures": [
+        "human_review_required: expected False, got True"
+      ],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-09",
+      "label": "Merchant settlement delay",
+      "category": "public_sample",
+      "passed": false,
+      "severity": "medium",
+      "status": 200,
+      "latency_ms": 1781.84,
+      "failures": [
+        "human_review_required: expected False, got True"
+      ],
+      "warnings": []
+    },
+    {
+      "case_id": "SAMPLE-10",
+      "label": "Duplicate payment claim",
+      "category": "public_sample",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 1788.95,
+      "failures": [
+        "relevant_transaction_id is not present in input transaction_history",
+        "relevant_transaction_id: expected 'TXN-10002', got 'TXN-10001, TXN-10002'"
+      ],
+      "warnings": [
+        "severity differs but is near expected: expected 'high', got 'medium'"
+      ]
+    },
+    {
+      "case_id": "WT-001",
+      "label": "wrong transfer exact amount and recipient match",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1627.06,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'high', got 'medium'"
+      ]
+    },
+    {
+      "case_id": "WT-002",
+      "label": "wrong transfer claim contradicted by repeated recipient pattern",
+      "category": "generated_reasoning",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 1983.15,
+      "failures": [
+        "evidence_verdict: expected 'inconsistent', got 'consistent'"
+      ],
+      "warnings": []
+    },
+    {
+      "case_id": "WT-003",
+      "label": "wrong transfer ambiguous same amount two recipients",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1461.64,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "WT-004",
+      "label": "wrong transfer amount absent but one recent transfer",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1670.75,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'high', got 'medium'"
+      ]
+    },
+    {
+      "case_id": "WT-005",
+      "label": "wrong transfer no transfer in history",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1558.5,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "WT-ST-01",
+      "label": "wrong transfer with completed transfer status",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 202.76,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "WT-ST-02",
+      "label": "wrong transfer with failed transfer status",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 176.13,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "WT-ST-03",
+      "label": "wrong transfer with pending transfer status",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 205.21,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "WT-ST-04",
+      "label": "wrong transfer with reversed transfer status",
+      "category": "generated_reasoning",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 219.63,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-001",
+      "label": "concurrent burst Wrong transfer with matching evidence",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 199.56,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-002",
+      "label": "concurrent burst Wrong transfer claim with inconsistent evidence",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 200.65,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-003",
+      "label": "concurrent burst Failed payment with balance deducted",
+      "category": "concurrency",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 258.37,
+      "failures": [
+        "evidence_verdict: expected 'consistent', got 'inconsistent'",
+        "case_type: expected 'payment_failed', got 'refund_request'",
+        "department: expected 'payments_ops', got 'customer_support'",
+        "severity: expected 'high', got 'low'"
+      ],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-004",
+      "label": "concurrent burst Refund request requiring safe handling",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 195.76,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-005",
+      "label": "concurrent burst Phishing or social engineering report",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 199.06,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-006",
+      "label": "concurrent burst Vague complaint, insufficient evidence",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 170.71,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-007",
+      "label": "concurrent burst Agent cash-in issue, Bangla complaint",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 197.76,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-008",
+      "label": "concurrent burst Multiple plausible transactions, ambiguous match",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 174.23,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-009",
+      "label": "concurrent burst Merchant settlement delay",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 191.34,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-010",
+      "label": "concurrent burst Duplicate payment claim",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 193.42,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-011",
+      "label": "concurrent burst wrong transfer exact amount and recipient match",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 182.91,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-012",
+      "label": "concurrent burst wrong transfer claim contradicted by repeated recipient pattern",
+      "category": "concurrency",
+      "passed": false,
+      "severity": "high",
+      "status": 200,
+      "latency_ms": 189.24,
+      "failures": [
+        "evidence_verdict: expected 'inconsistent', got 'insufficient_data'",
+        "relevant_transaction_id: expected 'WTX-011', got None"
+      ],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-013",
+      "label": "concurrent burst wrong transfer ambiguous same amount two recipients",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 194.05,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-014",
+      "label": "concurrent burst wrong transfer amount absent but one recent transfer",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 179.48,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-015",
+      "label": "concurrent burst wrong transfer no transfer in history",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 208.59,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "BURST-016",
+      "label": "concurrent burst failed payment with deducted balance",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 186.88,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-017",
+      "label": "concurrent burst failed claim but transaction completed",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 176.83,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-018",
+      "label": "concurrent burst pending payment unclear balance outcome",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 217.87,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "BURST-019",
+      "label": "concurrent burst payment failure amount mismatch",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 181.8,
+      "failures": [],
+      "warnings": [
+        "severity differs but is near expected: expected 'medium', got 'high'"
+      ]
+    },
+    {
+      "case_id": "BURST-020",
+      "label": "concurrent burst change of mind refund request",
+      "category": "concurrency",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 219.93,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "case_id": "HEALTH",
+      "label": "GET /health readiness",
+      "category": "health",
+      "passed": true,
+      "severity": "pass",
+      "status": 200,
+      "latency_ms": 1.86,
+      "failures": [],
+      "warnings": []
+    }
+  ]
+}

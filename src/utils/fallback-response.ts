@@ -1,4 +1,5 @@
 import type { AnalyzeTicketResponse } from "../schemas";
+import { reasonCodes } from "../constants/reason-codes";
 
 export const createFallbackResponse = (
   ticketId: string,
@@ -17,5 +18,5 @@ export const createFallbackResponse = (
     "Thank you for reaching out. We are reviewing your concern and will contact you through official support channels. Please do not share your PIN, OTP, password, or full card number with anyone.",
   human_review_required: true,
   confidence: 0,
-  reason_codes: ["safe_fallback", "insufficient_data"],
+  reason_codes: [reasonCodes.safeFallback, reasonCodes.insufficientData],
 });

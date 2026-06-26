@@ -1,12 +1,28 @@
 import { Elysia } from "elysia";
+import { env } from "./config";
 import { AnalyzeTicketController } from "./controllers/analyze-ticket.controller";
 import { registerAnalyzeTicketRoute } from "./routes/analyze-ticket.route";
 import { registerHealthRoute } from "./routes/health.route";
+import { GeminiService, type IAIService } from "./services/ai";
 import { InvestigatorService } from "./services/investigator.service";
 
-const port = Number(Bun.env.PORT ?? 8000);
+const createAIService = (): IAIService | undefined => {
+  if (!env.geminiApiKey) {
+    return undefined;
+  }
 
-const investigatorService = new InvestigatorService();
+  try {
+    return new GeminiService(
+      env.geminiApiKey,
+      env.geminiModel,
+      env.geminiTimeoutMs,
+    );
+  } catch {
+    return undefined;
+  }
+};
+
+const investigatorService = new InvestigatorService(createAIService());
 const analyzeTicketController = new AnalyzeTicketController(
   investigatorService,
 );
@@ -28,7 +44,7 @@ app.onError(({ code, set }) => {
 });
 
 if (import.meta.main) {
-  app.listen(port);
+  app.listen(env.port);
 
   console.log(`QueueStorm Investigator API listening on ${app.server?.url}`);
 }

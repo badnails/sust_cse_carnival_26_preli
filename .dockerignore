@@ -1,0 +1,11 @@
+.agents
+.codex
+.git
+.gitignore
+node_modules
+problem_outline
+*.log
+.env
+.env.*
+Dockerfile
+README.md
