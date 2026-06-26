@@ -153,7 +153,7 @@ src/
 
 ## System prompt for LLM
 
-This is the  prompt sent to `puku-ai-2.7` for creating the project. It lives in `src/services/ai/prompts/queuestorm.prompt.ts`.
+This is the  prompt sent to `gemini-3.1` as system prompt. It lives in `src/services/ai/prompts/queuestorm.prompt.ts`.
 
 ```
 You are QueueStorm Investigator, an internal support copilot for a digital finance platform.
